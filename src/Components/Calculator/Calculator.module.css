@@ -1,0 +1,97 @@
+.Container{
+    display:flex;
+    flex-wrap: wrap;
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .formContainer {
+    margin: 10px;
+    width: 100%;
+  }
+  
+  .banksContainer{
+    margin: 10px;
+    width: 100%;
+  }
+  
+  .title{
+    text-align: center;
+    font-size: 35px;
+  }
+  
+  .form {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .label {
+   
+    margin-bottom: 15px;
+    font-size: 10px;
+  
+  }
+  
+  .homeContainer {
+    min-height: calc(100vh - 50px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .homeTitle {
+    font-weight: 500;
+    font-size: 40px;
+    text-align: center;
+  }
+  
+  .bankItem{
+    display: flex;
+    border: 1px solid tomato;
+    margin-bottom: 5px;
+  }
+  .tablHead{
+    border: 1px solid;
+    font-size: 20px;
+    font-weight: bold;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  
+  .bankName{
+    
+    border: 1px solid;
+    border-collapse: collapse;
+    border-color: inherit;
+  
+    font-size: 15px;
+    font-weight: lighter;
+  }
+  
+  
+  .tabData {
+    border: 1px solid;
+    border-collapse: collapse;
+    border-color: inherit;
+  
+    font-size: 15px;
+    font-weight: lighter;
+  }
+  
+  
+  .deleteBtn{
+    width: 30px;
+    height: 30px;
+  }
+  
+  .deleteBtn:hover {
+    transform: scale(1.2)
+  }
+
+  .perMonth{
+      font-weight: lighter;
+      font-size: 20px;
+      color: grey;
+      margin-left: 10px;
+  }

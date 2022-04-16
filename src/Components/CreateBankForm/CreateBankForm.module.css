@@ -1,0 +1,88 @@
+.Container{
+  display: flex;
+ 
+}
+
+.formContainer {
+  margin: 10px;
+  width: 100%;
+}
+
+.banksContainer{
+  margin: 10px;
+  width: 100%;
+}
+
+.title{
+font-size: 35px;
+}
+
+.form {
+  padding-right: 20px;
+
+  width: 320px;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  font-size: 20px;
+
+}
+
+.homeContainer {
+  min-height: calc(100vh - 50px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.homeTitle {
+  font-weight: 500;
+  font-size: 40px;
+  text-align: center;
+}
+
+.bankItem{
+  display: flex;
+  border: 1px solid tomato;
+  margin-bottom: 5px;
+}
+.tablHead{
+  border: 1px solid;
+  font-size: 20px;
+  font-weight: bold;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.bankName{
+  
+  border: 1px solid;
+  border-collapse: collapse;
+  border-color: inherit;
+
+  font-size: 15px;
+  font-weight: lighter;
+}
+
+
+.tabData {
+  border: 1px solid;
+  border-collapse: collapse;
+  border-color: inherit;
+
+  font-size: 15px;
+  font-weight: lighter;
+}
+
+
+.deleteBtn{
+  width: 30px;
+  height: 30px;
+}
+
+.deleteBtn:hover {
+  transform: scale(1.2)
+}

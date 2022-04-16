@@ -1,0 +1,60 @@
+.App {
+  text-align: center;
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  width: 700px;
+}
+
+.title {
+  text-align: center;
+}
+
+.contacts__title {
+  text-align: center;
+}
+
+ul {
+  list-style: none;
+}
+
+.add__btn {
+  margin-right: auto;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  margin-left: 5px;
+  color: #006699;
+  background-color: #fff;
+  transition: 0.4s linear;
+}
+
+.add__btn:hover,
+.add__btn:focus {
+  color: #03a30b;
+  transform: scale(1.1);
+}
+
+.filter__add__container {
+  display: flex;
+}
+
+p {
+  margin: 0;
+}
+
+.main__title {
+  margin-top: 40px;
+  padding: 30px 0;
+  text-align: center;
+}
+
+.login__container,
+.reg__container {
+  padding: 30px 0;
+  margin: 50px auto 0 auto;
+  max-width: 500px;
+}
