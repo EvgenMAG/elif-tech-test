@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useSyncExternalStore } from 'react';
-// import { OperationsAuth } from '../redux/auth';
+
 import { v4 as uuidv4 } from 'uuid'
-// import { useDispatch } from 'react-redux';
+
 import s from './CreateBankForm.module.css';
 import basket from '../../img/basket3.png'
 import edit from '../../img/edit.png'
 
-console.log(basket);
+
 
 
 export default function CreateBankForm() {
@@ -21,13 +21,13 @@ export default function CreateBankForm() {
   useEffect(()=>{
   const saved = localStorage.getItem("bank");
   const dataFromLocalStorage = JSON.parse(saved);
-  console.log("Hi!!!!!!!!!!!!!!")
+  
   setStore((prevState)=> !dataFromLocalStorage? [...prevState] : [...dataFromLocalStorage])
  
   },[localStorage.getItem("bank")])
 
-  // window.addEventListener('storage', () => console.log("Fuck"));
-//   const disputch = useDispatch();
+  
+
 
   const handleChange = e => {
     const { name, value } = e.currentTarget;
@@ -57,13 +57,10 @@ export default function CreateBankForm() {
     console.log(user);
     const userId = !user.id? { name, interestRate, maxLoan, minDownPay, loanTerm,  id: uuidv4() }:
     { name, interestRate, maxLoan, minDownPay, loanTerm,  id }
-    const editedList = store.filter((item)=> item.id !== userId.id)
-    // setStore((prevStore)=> [...prevStore, user])
-    
-    console.log(editedList);
-    // console.log([...store, user]);
+    const editedList = store.filter((item)=> item.id !== userId.id) 
+   
     localStorage.setItem("bank", JSON.stringify([...editedList, userId]))
-    // disputch(OperationsAuth.registerUser({ name, email, password }));
+    
     reset();
   };
 
@@ -76,8 +73,7 @@ export default function CreateBankForm() {
    const  updatedList = store.filter((item)=> item.id !== id)
     setStore(() => updatedList )
    localStorage.setItem("bank", JSON.stringify(updatedList))
-   console.log(updatedList);
-  //  reset();
+  
   }
 
   const editItem = id => {
@@ -86,7 +82,7 @@ export default function CreateBankForm() {
 
   }
 
-  console.log(user);
+
 
   let disable = true;
   if (name && interestRate && maxLoan && minDownPay && loanTerm ) {

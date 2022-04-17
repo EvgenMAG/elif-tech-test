@@ -13,7 +13,6 @@ export default function  MortgageCalculator(){
     const { name, interestRate, maxLoan , minDownPay,loanTerm, id} = bank
     const {loanAmount, months} = unit
     
-    console.log(typeof loanAmount);
 
     const handleChange = e => {
         const { name, value } = e.currentTarget;
@@ -35,8 +34,8 @@ export default function  MortgageCalculator(){
         const P = Number(loanAmount)
         const m = Number(months)
         const i = Number(interestRate)
-
-          const MonthlyPayment = P*((i*0.1/12)*Math.pow((1+(i*0.1/12)),m))/Math.pow((1+(i*0.1/12)),(m-1));
+        
+          const MonthlyPayment = (P*((i*0.01/12)*Math.pow((1+(i*0.01/12)),m)))/((Math.pow((1+(i*0.01/12)),m)) -1) ;
           setResult(() => Math.round(MonthlyPayment) )
      }
   
@@ -51,22 +50,20 @@ export default function  MortgageCalculator(){
     useEffect(()=>{
         const saved = localStorage.getItem("bank");
         const dataFromLocalStorage = JSON.parse(saved);
-        console.log("Hi I am new page!!!!!!!!!!!!!!")
+       
         setStore((prevState)=> !dataFromLocalStorage? [...prevState] : [...dataFromLocalStorage])
        
         },[localStorage.getItem("bank")])
-
-     console.log(store);   
+ 
 
      const onChoosingBank =(e)=>{
-         console.log("Hi!!!");
-         console.log(e.target.value);
+        
          const id = e.target.value
          const currentBank = store.find((item)=> item.id === id)
          setBank(()=> currentBank)
          reset()
      }
-     console.log(bank);
+
 
      const reset = () => {
         setUnit({ loanAmount:'', months:'' });
