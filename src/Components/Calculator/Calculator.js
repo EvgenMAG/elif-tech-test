@@ -13,15 +13,17 @@ export default function  MortgageCalculator(){
     const { name, interestRate, maxLoan , minDownPay,loanTerm, id} = bank
     const {loanAmount, months} = unit
     
-
+    console.log(typeof months);
+    console.log(typeof loanAmount);
+   
     const handleChange = e => {
         const { name, value } = e.currentTarget;
         switch (name) {
           case 'loanAmount':
-            setUnit(prevState => ({ ...prevState, [name]: value }));
+            setUnit(prevState => ({ ...prevState, [name]: +value }));
             break;
           case 'months':
-            setUnit(prevState => ({ ...prevState, [name]: value }));
+            setUnit(prevState => ({ ...prevState, [name]: +value }));
             break;
           default:
             console.log("There aren't such data");
@@ -73,9 +75,9 @@ export default function  MortgageCalculator(){
      
 
      let disable = true;
-  if ( loanAmount, months) {
-    disable = false;
-  }
+  if ( loanAmount, months) disable = false;
+    
+   if (loanAmount > maxLoan || months > loanTerm ) disable = true;
 
     return(
         <div className={s.Container}>
@@ -104,6 +106,7 @@ export default function  MortgageCalculator(){
             value={loanAmount}
             onChange={handleChange}
           />
+         {loanAmount > maxLoan && name && <p className={s.notification}>{`The amount can not be more ${maxLoan}`} </p>}
         </label>
         <label className={s.label}>
         Number of pay-out  months 
@@ -114,8 +117,9 @@ export default function  MortgageCalculator(){
             value={months}
             onChange={handleChange}
           />
+          {months > loanTerm && name && <p className={s.notification}>{`Loan term can not be more ${loanTerm} months`} </p>}
         </label>
-        <button type="submit" disabled={disable}>Calculate</button>
+        <button type="submit" className={s.btnCalc} disabled={disable}>Calculate</button>
   </form>
     <div>
         {result && <><span>{result}</span><span className={s.perMonth}>per month</span></>}

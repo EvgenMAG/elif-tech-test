@@ -164,7 +164,7 @@ export default function CreateBankForm() {
          <tbody> 
     { store.map((item)=>
     <tr key={item.id} >
-    <td className={s.bankName} onClick={()=>{console.log("Hi")}}>{item.name}</td>
+    <td className={s.bankName}>{item.name}</td>
     <td className={s.tabData}>{item.interestRate}</td>
     <td className={s.tabData}>{item.maxLoan}</td>
     <td className={s.tabData}>{item.minDownPay}</td>
