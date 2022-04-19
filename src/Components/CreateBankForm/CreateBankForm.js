@@ -54,7 +54,6 @@ export default function CreateBankForm() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(user);
     const userId = !user.id? { name, interestRate, maxLoan, minDownPay, loanTerm,  id: uuidv4() }:
     { name, interestRate, maxLoan, minDownPay, loanTerm,  id }
     const editedList = store.filter((item)=> item.id !== userId.id) 
@@ -106,9 +105,12 @@ export default function CreateBankForm() {
             type="number"
             name="interestRate"
             placeholder='5 %'
+            min={0}
+            max = {25}
             value={interestRate}
             onChange={handleChange}
           />
+
         </label>
 
         <label className={s.label}>
@@ -117,6 +119,7 @@ export default function CreateBankForm() {
             type="number"
             name="maxLoan"
             placeholder= "100000000 $"
+            min={0}
             value={maxLoan}
             onChange={handleChange}
           />
@@ -127,7 +130,9 @@ export default function CreateBankForm() {
           <input
             type="number"
             name="minDownPay"
-            placeholder= "300 $"
+            placeholder= "10 %"
+            min={0}
+            max = {50}
             value={minDownPay}
             onChange={handleChange}
           />
@@ -138,12 +143,14 @@ export default function CreateBankForm() {
           <input
             type="number"
             name="loanTerm"
-            value={loanTerm}
             placeholder= "36 months"
+            min={0}
+            max = {120}
+            value={loanTerm}
             onChange={handleChange}
           />
         </label>
-        <button type="submit" disabled={disable}>Create</button>
+        <button type="submit" disabled={disable} className={s.btnCreate}>Create</button>
       </form>
     </div>
     <div className={s.banksContainer}>

@@ -1,6 +1,7 @@
 .Container{
     display:flex;
     flex-wrap: wrap;
+    justify-content: space-between;
     width: 600px;
     margin-left: auto;
     margin-right: auto;
@@ -23,16 +24,21 @@
   
   .form {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
   }
   
   .label {
    
-    margin-bottom: 15px;
-    font-size: 10px;
+    display: flex;
+    flex-direction: column;
     position: relative;
+    margin-bottom: 25px;
+    font-size: 20px;
   
+  }
+
+  .label:last-child {
+    margin-bottom: 55px;
   }
   
   .homeContainer {
@@ -91,6 +97,10 @@
     transform: scale(1.2)
   }
 
+  .resultContainer{
+      margin-top: 50px;
+  }
+
   .perMonth{
       font-weight: lighter;
       font-size: 20px;
@@ -99,11 +109,14 @@
   }
 
   .notification{
-      color: red;
       position: absolute;
+      top: 70%;
+      font-size: 14px;
+      color: red;
   }
 
   .btnCalc{
-      border-radius: 20%;
+      border-radius: 50%;
       height: 35px;
+      width: 100px;
   }

@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect} from 'react';
 
 import s from './Calculator.module.css';
 
@@ -8,14 +8,15 @@ import s from './Calculator.module.css';
 export default function  MortgageCalculator(){
     const [store, setStore] = useState([]);
     const [bank, setBank] = useState({ name: '', interestRate: '', maxLoan: '' , minDownPay: '',loanTerm:'', id: '' });
-    const [unit, setUnit] = useState({loanAmount:'',months:''}); 
+    const [unit, setUnit] = useState({loanAmount:'',months:'', minPayOut: ''}); 
     const [result, setResult] = useState('');
     const { name, interestRate, maxLoan , minDownPay,loanTerm, id} = bank
-    const {loanAmount, months} = unit
+    const {loanAmount, months, minPayOut} = unit
     
-    console.log(typeof months);
-    console.log(typeof loanAmount);
-   
+    console.log(minDownPay);
+    console.log(typeof minPayOut );
+    console.log(minPayOut !== 0  && minPayOut < minDownPay );
+    
     const handleChange = e => {
         const { name, value } = e.currentTarget;
         switch (name) {
@@ -23,6 +24,9 @@ export default function  MortgageCalculator(){
             setUnit(prevState => ({ ...prevState, [name]: +value }));
             break;
           case 'months':
+            setUnit(prevState => ({ ...prevState, [name]: +value }));
+            break;
+            case 'minPayOut':
             setUnit(prevState => ({ ...prevState, [name]: +value }));
             break;
           default:
@@ -36,8 +40,10 @@ export default function  MortgageCalculator(){
         const P = Number(loanAmount)
         const m = Number(months)
         const i = Number(interestRate)
+        const minPayment = Number(minDownPay)
+        const remainAmount = P - (P*minPayment*0.01)
         
-          const MonthlyPayment = (P*((i*0.01/12)*Math.pow((1+(i*0.01/12)),m)))/((Math.pow((1+(i*0.01/12)),m)) -1) ;
+          const MonthlyPayment = (remainAmount*((i*0.01/12)*Math.pow((1+(i*0.01/12)),m)))/((Math.pow((1+(i*0.01/12)),m)) -1) ;
           setResult(() => Math.round(MonthlyPayment) )
      }
   
@@ -59,69 +65,83 @@ export default function  MortgageCalculator(){
  
 
      const onChoosingBank =(e)=>{
-        
+         
          const id = e.target.value
          const currentBank = store.find((item)=> item.id === id)
-         setBank(()=> currentBank)
+         setBank(()=> currentBank? currentBank: { name: '', interestRate: '', maxLoan: '' , minDownPay: '',loanTerm:'', id: '' })
          reset()
      }
 
 
      const reset = () => {
-        setUnit({ loanAmount:'', months:'' });
+        setUnit({ loanAmount:'', months:'', minPayOut: '' });
         setResult("");
        
       };
      
 
      let disable = true;
-  if ( loanAmount, months) disable = false;
+  if ( loanAmount && months && minPayOut) disable = false;
     
-   if (loanAmount > maxLoan || months > loanTerm ) disable = true;
+   if (loanAmount > maxLoan || months > loanTerm || minPayOut < minDownPay ) disable = true;
+
+  
 
     return(
         <div className={s.Container}>
             
          <h1 className={s.title}> Your Mortgage Calculator</h1>
 
-   
-  
-
-
   <form onSubmit={handleSubmit}  autoComplete="off" className={s.form}>
   <label className={s.label}> Choose the bank
-    <select 
+  <select 
     onChange={onChoosingBank}>
     <option></option>
     {store.map((item)=> <option key={item.id} value={item.id}>{item.name}</option>)}
   </select>
-    </label>
+  </label>
+  
 
   <label className={s.label}>
         Amount borrowed 
           <input
             type="number"
             name="loanAmount"
-            placeholder={`not more than ${bank.maxLoan}`}
+            placeholder={`not more than ${maxLoan}`}
+            min={0}
             value={loanAmount}
             onChange={handleChange}
           />
          {loanAmount > maxLoan && name && <p className={s.notification}>{`The amount can not be more ${maxLoan}`} </p>}
         </label>
         <label className={s.label}>
+        Down payment 
+          <input
+            type="number"
+            name="minPayOut"
+            placeholder={`minimum percentage ${minDownPay}`}
+            min ={0}
+            value={minPayOut}
+            onChange={handleChange}
+          />
+          { minPayOut !== 0  && minPayOut < minDownPay && minPayOut &&  <p className={s.notification}>{`Min. down payment  ${minDownPay} percent`} </p>}
+        </label>
+        <label className={s.label}>
         Number of pay-out  months 
           <input
             type="number"
             name="months"
-            placeholder={`not more than ${bank.loanTerm}`}
+            placeholder={`not more than ${loanTerm}`}
+            min={0}
             value={months}
             onChange={handleChange}
           />
           {months > loanTerm && name && <p className={s.notification}>{`Loan term can not be more ${loanTerm} months`} </p>}
         </label>
+        
         <button type="submit" className={s.btnCalc} disabled={disable}>Calculate</button>
   </form>
-    <div>
+    <div className={s.resultContainer}>
         {result && <><span>{result}</span><span className={s.perMonth}>per month</span></>}
     </div>
 

@@ -31,6 +31,13 @@ font-size: 35px;
 
 }
 
+.btnCreate{
+  border-radius: 50%;
+  height: 35px;
+  width: 100px;
+}
+
+
 .homeContainer {
   min-height: calc(100vh - 50px);
   display: flex;
