@@ -142,7 +142,7 @@ export default function  MortgageCalculator(){
         <button type="submit" className={s.btnCalc} disabled={disable}>Calculate</button>
   </form>
     <div className={s.resultContainer}>
-        {result && <><span>{result}</span><span className={s.perMonth}>per month</span></>}
+        {result && <><span className={s.resultPerMonth}>{result}</span><span className={s.perMonth}>per month</span></>}
     </div>
 
         </div>

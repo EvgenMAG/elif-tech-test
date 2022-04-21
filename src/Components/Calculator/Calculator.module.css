@@ -108,6 +108,11 @@
       margin-left: 10px;
   }
 
+  .resultPerMonth {
+    font-weight: bold;
+    font-size: 25px;
+  }
+
   .notification{
       position: absolute;
       top: 70%;
