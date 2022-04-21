@@ -8,9 +8,7 @@ export default function  HomePage(){
 
     return(
         <div>
-            <h1>
                 <CreateBankForm/>
-            </h1>
         </div>
     )
 }

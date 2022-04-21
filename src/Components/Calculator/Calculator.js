@@ -13,9 +13,6 @@ export default function  MortgageCalculator(){
     const { name, interestRate, maxLoan , minDownPay,loanTerm, id} = bank
     const {loanAmount, months, minPayOut} = unit
     
-    console.log(minDownPay);
-    console.log(typeof minPayOut );
-    console.log(minPayOut !== 0  && minPayOut < minDownPay );
     
     const handleChange = e => {
         const { name, value } = e.currentTarget;
@@ -41,10 +38,12 @@ export default function  MortgageCalculator(){
         const m = Number(months)
         const i = Number(interestRate)
         const minPayment = Number(minDownPay)
-        const remainAmount = P - (P*minPayment*0.01)
+        const remainAmount = P - minPayOut
         
-          const MonthlyPayment = (remainAmount*((i*0.01/12)*Math.pow((1+(i*0.01/12)),m)))/((Math.pow((1+(i*0.01/12)),m)) -1) ;
-          setResult(() => Math.round(MonthlyPayment) )
+        
+          const  result= (remainAmount*((i*0.01/12)*Math.pow((1+(i*0.01/12)),m)))/((Math.pow((1+(i*0.01/12)),m)) -1) ;
+          const MonthlyPayment = result.toFixed(2);
+          setResult(() => MonthlyPayment )
      }
   
       const handleSubmit = (e)=>{
@@ -119,12 +118,13 @@ export default function  MortgageCalculator(){
           <input
             type="number"
             name="minPayOut"
-            placeholder={`minimum percentage ${minDownPay}`}
+            placeholder={`minimum payment is ${loanAmount? Math.round(Number(minDownPay*0.01)*Number(loanAmount)): ""}`}
             min ={0}
+            max = {loanAmount*0.9}
             value={minPayOut}
             onChange={handleChange}
           />
-          { minPayOut !== 0  && minPayOut < minDownPay && minPayOut &&  <p className={s.notification}>{`Min. down payment  ${minDownPay} percent`} </p>}
+          {minPayOut !== 0 && minPayOut < Number(minDownPay*0.01)*Number(loanAmount) && minPayOut &&  <p className={s.notification}>{`Min. down payment  ${Math.round(Number(minDownPay*0.01)*Number(loanAmount))} `} </p>}
         </label>
         <label className={s.label}>
         Number of pay-out  months 
